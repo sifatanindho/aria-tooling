@@ -231,4 +231,4 @@ All streams are tracked with device-clock-based timestamps for downstream alignm
 
 ## License
 
-This project is licensed under the [MIT License](./LICENSE).
+This project is primarily licensed under the [MIT License](./LICENSE). Portions of the repository (notably `projectaria_eyetracking/` and `extraction_scripts/4_extract_eye_gaze_metrics.py`) include Apache-2.0 licensed code; see the headers in those files for details.

@@ -210,6 +210,8 @@ All streams are tracked with device-clock-based timestamps for downstream alignm
   - `extraction_scripts/run_pipeline.py`
   - `extraction_scripts/run_all_games.py`
   - `extraction_scripts/4_extract_eye_gaze_metrics.py`
+  - `extraction_scripts/5_sync_data.py`
+  - `extraction_scripts/6_create_transcript.py`
 - Update default paths or pass explicit CLI arguments as needed.
 
 ---

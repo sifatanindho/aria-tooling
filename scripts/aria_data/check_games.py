@@ -1,8 +1,9 @@
 import json, os, glob
 from datetime import datetime
 from collections import defaultdict
+from pathlib import Path
 
-base = "/data2/aria_data/aria_data"
+base = str(Path(__file__).resolve().parents[2] / "data")
 games = sorted([d for d in os.listdir(base) if d.startswith("Game") and os.path.isdir(os.path.join(base, d))],
                key=lambda x: int(x[4:]))
 

@@ -29,7 +29,8 @@ from pathlib import Path
 from datetime import datetime
 
 SCRIPT_DIR = Path(__file__).parent
-DATA_DIR = Path("/data2/aria_data/aria_data")  # Location of Game6-Game11 folders
+REPO_ROOT = Path(__file__).resolve().parents[2]
+DATA_DIR = REPO_ROOT / "data"
 PIPELINE_SCRIPT = SCRIPT_DIR / "run_pipeline.py"
 
 # Always use the aria_extraction conda env Python
@@ -140,8 +141,8 @@ def main():
         print(f"  - {vrs['game']}/glasses {vrs['glasses']}{fps_note}: {vrs['path'].name}")
     
     # Output directory
-    output_base = SCRIPT_DIR / "output"
-    output_base.mkdir(exist_ok=True)
+    output_base = DATA_DIR / "output"
+    output_base.mkdir(parents=True, exist_ok=True)
     
     # Process each VRS file
     results = {}

@@ -107,7 +107,7 @@ pip install \
 
 ## Quick start
 
-## 1) Run full extraction for a single `.vrs`
+### 1) Run full extraction for a single `.vrs`
 
 ```bash
 cd extraction_scripts

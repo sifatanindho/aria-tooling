@@ -16,12 +16,14 @@ import argparse
 import csv
 import os
 import sys
-# --- FIX: ADD REPO TO PATH ---
-# We define the path to the original repository so Python can find the imports
-REPO_ROOT = "/data2/aria_data/projectaria_eyetracking"
-if REPO_ROOT not in sys.path:
-    sys.path.append(REPO_ROOT)
-# -----------------------------
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+SCRIPTS_ROOT = REPO_ROOT / "scripts"
+PROJECTARIA_ROOT = SCRIPTS_ROOT / "projectaria_eyetracking"
+for path in (str(SCRIPTS_ROOT), str(PROJECTARIA_ROOT)):
+    if path not in sys.path:
+        sys.path.append(path)
 
 import rerun as rr
 import torch
@@ -34,7 +36,9 @@ except ImportError:
     try:
         from inference import infer
     except ImportError:
-        raise ImportError(f"Could not find 'inference' module. Ensure {REPO_ROOT} is the correct path.")
+        raise ImportError(
+            f"Could not find 'inference' module. Ensure {PROJECTARIA_ROOT} exists."
+        )
 
 from projectaria_tools.core import data_provider
 from projectaria_tools.core.mps import EyeGaze, get_eyegaze_point_at_depth
@@ -45,13 +49,11 @@ from projectaria_tools.utils.rerun_helpers import AriaGlassesOutline
 from tqdm import tqdm
 
 def parse_args():
-    # --- FIX: UPDATE DEFAULT RESOURCE PATHS ---
-    # Instead of using __file__, we point to the REPO_ROOT
     default_checkpoint = os.path.join(
-        REPO_ROOT, "projectaria_eyetracking/inference/model/pretrained_weights/social_eyes_uncertainty_v1/weights.pth"
+        PROJECTARIA_ROOT, "inference/model/pretrained_weights/social_eyes_uncertainty_v1/weights.pth"
     )
     default_config = os.path.join(
-        REPO_ROOT, "projectaria_eyetracking/inference/model/pretrained_weights/social_eyes_uncertainty_v1/config.yaml"
+        PROJECTARIA_ROOT, "inference/model/pretrained_weights/social_eyes_uncertainty_v1/config.yaml"
     )
     
     parser = argparse.ArgumentParser()

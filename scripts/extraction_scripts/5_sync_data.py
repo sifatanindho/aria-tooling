@@ -32,6 +32,10 @@ from glob import glob
 import pandas as pd
 import numpy as np
 
+REPO_ROOT = Path(__file__).resolve().parents[2]
+DEFAULT_DATA_DIR = str(REPO_ROOT / "data")
+DEFAULT_OUTPUT_DIR = str(REPO_ROOT / "data" / "output")
+
 
 def extract_preview_frames(vrs_path: str, output_dir: str, seconds: float = 300, fps: int = 5):
     """Extract initial RGB frames from VRS file for sync point identification."""
@@ -343,9 +347,9 @@ def main():
     # preview-all - all VRS in a game folder
     p2 = subparsers.add_parser("preview-all", help="Extract previews for all recordings in a game")
     p2.add_argument("--game", required=True, help="Game folder name (e.g., Game1)")
-    p2.add_argument("--data-dir", default="/data2/aria_data/aria_data",
+    p2.add_argument("--data-dir", default=DEFAULT_DATA_DIR,
                     help="Base data directory")
-    p2.add_argument("--output", "-o", default="/data2/aria_data/extraction_scripts/output",
+    p2.add_argument("--output", "-o", default=DEFAULT_OUTPUT_DIR,
                     help="Output base directory")
     p2.add_argument("--seconds", type=float, default=60, help="Seconds to extract (default: 60)")
 
@@ -359,7 +363,7 @@ def main():
     # sync-all - batch sync from config
     p4 = subparsers.add_parser("sync-all", help="Sync all recordings from config file")
     p4.add_argument("--config", "-c", required=True, help="Path to sync config JSON")
-    p4.add_argument("--data-dir", default="/data2/aria_data/extraction_scripts/output",
+    p4.add_argument("--data-dir", default=DEFAULT_OUTPUT_DIR,
                     help="Directory containing extracted data")
 
     args = parser.parse_args()

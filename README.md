@@ -68,7 +68,7 @@ Data-inspection helper scripts for checking recording organization/timing across
 
 ## Requirements
 
-## System dependencies
+### System dependencies
 
 - Python 3.10+ recommended
 - `ffmpeg` (required by multiple scripts)
